@@ -91,7 +91,7 @@ export class App {
           let d = e[i].getAttribute(attr)
           const target = attr.replace(/[ -~]*[:@]/g, '')
           const action = (new Function(`${x} ${this.declare()} ${d}; return ${this.unpack()}`))
-          e[i].onclick = () => {
+          e[i][`on${target}`] = () => {
             this.data = action()
           }
         }
