@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Lexend Deca';
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+* {
+  font-family: inherit;
+}
+
+h1, h2, h3 {
+  margin: 5px 0;
+}
+
+button, a {
+  border: none;
+  outline: none;
+}
+
+button {
+  display: flex;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  color: white;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a[href] {
+  color: dodgerblue;
+}
