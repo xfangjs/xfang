@@ -19,7 +19,10 @@ export class App {
     document.body.appendChild(e)
   }
 
-  mount() {
+  mount(...components) {
+    for (const component of components) {
+      component.parent.appendChild(component.fang)
+    }
     const e = document.querySelectorAll(this.selector)
     const x = this.define()
     // console.log(x)
@@ -82,8 +85,18 @@ export class App {
         if (attr.startsWith(':') || attr.startsWith('x-bind:')) {
           let d = e[i].getAttribute(attr)
           const target = attr.replace(/[ -~]*:/g, '')
-          if (target === 'class' || target === 'style') {
-            console.log('special binding')
+          if (target === 'class') {
+            let c = render(d)
+            if (Array.isArray(c)) {
+              c = c.join(' ')
+            }
+            e[i].className = c
+          } else if (target === 'style') {
+            if (Array.isArray(d)) {
+
+            } else if (typeof d === 'object') {
+              let o = render(d)
+            }
           } else {
             e[i].setAttribute(target, render(d))
           }
@@ -96,6 +109,10 @@ export class App {
           }
         }
       }
+      const u = document.querySelectorAll('[x-html]')
+      for (let i = 0; i < u.length; i++) {
+        u[i].innerHTML = render(u[i].getAttribute('x-html'))
+      }
     }
   }
 
@@ -106,9 +123,13 @@ export class App {
         s += `let ${k} = '${v}'; `
       } else if (typeof v === 'number') {
         s += `let ${k} = ${v}; `
+      } else if (typeof v === 'boolean') {
+        s += `let ${k} = ${v}; `
       } else if (typeof v === 'function') {
         const f = v.toString().match(/\([	-~]*/g)[0]
         s += `function ${k}${f};`.replace(/=>/g, '')
+      } else if (typeof v === 'object') {
+
       } else if (Array.isArray(v)) {
         s += `const ${k} = ${JSON.stringify(v)}`
       }
@@ -142,4 +163,23 @@ export function load(app) {
   window.requestAnimationFrame(() => {
     load(app)
   })
+}
+
+export class Component {
+  constructor(tag, html, attributes) {
+    this.fang = document.createElement(tag)
+    for (const [k, v] of Object.entries(attributes)) {
+      this.fang.setAttribute(k, v)
+    }
+    this.fang.innerHTML = html
+    this.parent = ''
+  }
+
+  attach(parent) {
+    if (typeof parent === 'string') {
+      this.parent = document.querySelector(parent)
+    } else {
+      this.parent = parent
+    }
+  }
 }

@@ -17,8 +17,9 @@
       XFANG
     </h1>
     <h2>Classic Reactive Button</h2>
-    <p>This button is reactive!</p>
-    <button x x-on:click="increment()">Count: { count }</button>
+    <p>These buttons are reactive!</p>
+    <button x x-on:click="increment()">Click: { count }</button>
+    <button x x-on:mouseover="increment()">Hover: { count }</button>
     <h2>Regular Text Binding</h2>
     <p>This element is bound to a variable!</p>
     <span x>{ message }</span>
@@ -26,6 +27,18 @@
     <a x x-bind:href="url">
       Variable URL!
     </a>
+    <p>This span element's class list is bound to a variable</p>
+    <span x x-bind:class="[(closed ? 'hidden' : 'open'), 'normal']">
+      Class Binding
+    </span>
+    <h2>HTML Binding</h2>
+    <span x-html="button">
+
+    </span>
+    <h2>Components</h2>
+    <span id="component-demo">
+      
+    </span>
   </div>
   <script src="xfang.js" type="module"></script>
   <script src="script.js" type="module"></script>

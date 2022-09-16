@@ -32,9 +32,10 @@ button {
   font-size: 18px;
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: dodgerblue;
+  background-color: #5865f2;
   color: white;
   cursor: pointer;
+  margin: 10px 0;
 }
 
 a {
@@ -43,5 +44,9 @@ a {
 }
 
 a[href] {
-  color: dodgerblue;
+  color: #5865f2;
+}
+
+.hidden {
+  display: none;
 }
