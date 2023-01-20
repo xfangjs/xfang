@@ -28,4 +28,3 @@ console.log(greeter)
 
 const app = new App(data, methods)
 app.mount(greeter)
-load(app)

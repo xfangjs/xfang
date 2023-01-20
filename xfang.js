@@ -106,6 +106,7 @@ export class App {
           const action = (new Function(`${x} ${this.declare()} ${d}; return ${this.unpack()}`))
           e[i][`on${target}`] = () => {
             this.data = action()
+            this.mount()
           }
         }
       }
@@ -156,13 +157,6 @@ export class App {
     }
     return s
   }
-}
-
-export function load(app) {
-  app.mount()
-  window.requestAnimationFrame(() => {
-    load(app)
-  })
 }
 
 export class Component {
